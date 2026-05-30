@@ -168,13 +168,16 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-
 
   var FREE_TEXT = "FREE SPACE\nLarry is 85 & legendary";
   var DEFAULT_GRID = [
-    "Mark had earthquake belly","Had an espresso martini","Had birthday cake","Told childhood story","Visited Tootsies",
-    "Sang happy birthday","Stranger buys Larry a drink","Meet Miss State fan","Someone suggests one more stop","A cowboy hat appears",
-    "Someone mentions the big head","Group photo takes more than 3 tries",FREE_TEXT,"A toast makes someone tear up","Someone orders Nashville hot chicken",
-    "Live band plays a song everyone knows","Larry poses with the sign","Someone complains about their feet","A rooftop bar is suggested","Someone scans the Venmo QR",
-    "A bachelorette group crosses your path","Someone says \"Papa\"","A request is made to the band","Broadway is louder than expected","Larry takes a picture with a stranger"
+    "Mark had earthquake belly","Someone needs a phone charger","Find someone older than Larry","Had an espresso martini","Visited Tootsies",
+    "Larry takes a photo with a police officer","A stranger scans the QR to buy Larry a drink","Meet Miss State fan","Someone suggests one more stop","Larry gets pulled up on stage",
+    "Someone cries","Amy gets told to be quiet",FREE_TEXT,"Take a picture with another Larry","You order an old fashioned",
+    "A song from Larry's college days plays","Larry poses with the sign","Get Larry on the dance floor","Someone disappears without telling the group","See a group wearing matching t-shirts",
+    "Larry takes a picture with someone turning 21","Larry takes a picture with a bride","Celebrity sighting","Someone gives a toast","Someone complains about their feet"
   ];
-  var POOL = DEFAULT_GRID.filter(function(_,i){return i!==12;});
+  var EXTRA = [
+    "Larry wears a cowboy hat","See someone else with a QR code","See someone you know on Broadway"
+  ];
+  var POOL = DEFAULT_GRID.filter(function(_,i){return i!==12;}).concat(EXTRA);
 
   var LINES = [];
   for(var r=0;r<5;r++){LINES.push([r*5,r*5+1,r*5+2,r*5+3,r*5+4]);}
@@ -187,7 +190,7 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.5;z-
   function save(o){ try{ localStorage.setItem(KEY, JSON.stringify(o)); }catch(e){} }
 
   function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
-  function buildGrid(doShuffle){ if(!doShuffle) return DEFAULT_GRID.slice(); var s=shuffle(POOL); s.splice(12,0,FREE_TEXT); return s; }
+  function buildGrid(doShuffle){ if(!doShuffle) return DEFAULT_GRID.slice(); var s=shuffle(POOL).slice(0,24); s.splice(12,0,FREE_TEXT); return s; }
 
   // ---- state ----
   var state = { name:"", grid:DEFAULT_GRID.slice(), marked:freshMarks(), won:false, shuffle:true };
